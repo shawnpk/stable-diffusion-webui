@@ -371,7 +371,6 @@ class Api:
         logging.info(f"Starting task {task_id}")
 
         if task_id.startswith("task(") and task_id.endswith(")"):
-            p.task_id = task_id[5:-1]
             progress.add_task_to_queue(task_id)
 
         progress.start_task(task_id)

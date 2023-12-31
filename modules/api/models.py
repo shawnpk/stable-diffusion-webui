@@ -106,6 +106,7 @@ StableDiffusionTxt2ImgProcessingAPI = PydanticModelGenerator(
         {"key": "script_args", "type": list, "default": []},
         {"key": "send_images", "type": bool, "default": True},
         {"key": "save_images", "type": bool, "default": False},
+        {"key": "task_id", "type": str, "default": None},
         {"key": "alwayson_scripts", "type": dict, "default": {}},
     ]
 ).generate_model()
