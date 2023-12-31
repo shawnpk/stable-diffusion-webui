@@ -31,6 +31,12 @@ def setup_logging(loglevel):
     if TQDM_IMPORTED:
         loghandlers.append(TqdmLoggingHandler())
 
+    file_handler = logging.FileHandler('stable_diffusion.log')
+    formatter = logging.Formatter('%(asctime)s %(levelname)s [%(name)s] %(message)s')
+    file_handler.setFormatter(formatter)
+
+    loghandlers.append(file_handler)
+
     if loglevel:
         log_level = getattr(logging, loglevel.upper(), None) or logging.INFO
         logging.basicConfig(

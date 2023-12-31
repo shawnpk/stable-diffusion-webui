@@ -32,6 +32,8 @@ import piexif
 import piexif.helper
 from contextlib import closing
 
+import logging
+
 
 def script_name_to_index(name, scripts):
     try:
@@ -366,6 +368,8 @@ class Api:
         if task_id is None:
             task_id = str(time.time())
 
+        logging.info(f"Starting task {task_id}")
+
         if task_id.startswith("task(") and task_id.endswith(")"):
             p.task_id = task_id[5:-1]
             progress.add_task_to_queue(task_id)
@@ -375,6 +379,7 @@ class Api:
         with self.queue_lock:
             with closing(StableDiffusionProcessingTxt2Img(sd_model=shared.sd_model, **args)) as p:
                 p.is_api = True
+                p.task_id = task_id
                 p.scripts = script_runner
                 p.outpath_grids = opts.outdir_txt2img_grids
                 p.outpath_samples = opts.outdir_txt2img_samples
